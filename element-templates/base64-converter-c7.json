@@ -1,0 +1,142 @@
+{
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
+  "name": "base64-converter-c7",
+  "id": "com.codot.camundaconnectors.converter.base64-c7",
+  "description": "CODOT Base64 Converter",
+  "version": 1,
+  "entriesVisible": false,
+  "appliesTo": [
+    "bpmn:ServiceTask"
+  ],
+  "elementType": {
+    "value": "bpmn:ServiceTask"
+  },
+  "groups": [
+    {
+      "id": "inputs",
+      "label": "Input Mapping"
+    },
+    {
+      "id": "output",
+      "label": "Output Mapping"
+    },
+    {
+      "id": "debug",
+      "label": "Debug tools"
+    }
+  ],
+  "properties": [
+    {
+      "label": "Implementation Type",
+      "type": "Hidden",
+      "value": "com.codot.camundaconnectors.converter.ConverterFunction",
+      "editable": false,
+      "binding": {
+        "type": "property",
+        "name": "camunda:class"
+      }
+    },
+    {
+      "label": "Operation",
+      "type": "Dropdown",
+      "value": "decode",
+      "choices": [
+        {
+          "name": "Base64 decode",
+          "value": "decode"
+        },
+        {
+          "name": "Base64 encode",
+          "value": "encode"
+        }
+      ],
+      "binding": {
+        "type": "camunda:inputParameter",
+        "name": "operation"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "group": "inputs"
+    },
+    {
+      "label": "Source",
+      "type": "String",
+      "feel": "required",
+      "binding": {
+        "type": "camunda:inputParameter",
+        "name": "src"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "group": "inputs"
+    },
+    {
+      "label": "status code",
+      "description": "Name of variable to store the response in",
+      "group": "output",
+      "type": "String",
+		"value": "status_code",
+      "constraints": {
+        "notEmpty": true
+      },
+      "binding": {
+        "type": "camunda:outputParameter",
+        "source": "${status_code}"
+      }
+    },
+    {
+      "label": "status massage",
+      "description": "Name of variable to store the response in",
+      "group": "output",
+      "type": "String",
+		"value": "status_msg",
+      "constraints": {
+        "notEmpty": true
+      },
+      "binding": {
+        "type": "camunda:outputParameter",
+        "source": "${status_msg}"
+      }
+    },
+    {
+      "label": "response",
+      "description": "Name of variable to store the response in",
+      "group": "output",
+      "type": "String",
+		"value": "response",
+      "constraints": {
+        "notEmpty": true
+      },
+      "binding": {
+        "type": "camunda:outputParameter",
+        "source": "${response}"
+      }
+    },
+	{
+      "label": "Debug mode",
+      "feel": "required",
+      "binding": {
+        "type": "camunda:inputParameter",
+        "name": "debugMode"
+      },
+		"value": "false",
+      "constraints": {
+        "notEmpty": true
+      },
+		"type": "Dropdown",
+      "choices": [
+        {
+          "name": "TRUE",
+          "value": "true"
+        },
+        {
+          "name": "FALSE",
+          "value": "false"
+        }
+      ],
+      "group": "debug"
+    }
+  ]
+}

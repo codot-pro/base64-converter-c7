@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0haevpk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.13.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="TestBase64ConverterTemplate" isExecutable="true" camunda:historyTimeToLive="3">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0wij7gk</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0wij7gk" sourceRef="StartEvent_1" targetRef="Activity_03mntty" />
+    <bpmn:sequenceFlow id="Flow_1187hd1" sourceRef="Activity_03mntty" targetRef="Activity_1sxkfj8" />
+    <bpmn:endEvent id="Event_1gz2ozn">
+      <bpmn:incoming>Flow_1hkgo6g</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_03mntty" name="Base64 encode" camunda:modelerTemplate="com.codot.camundaconnectors.converter.base64-c7" camunda:modelerTemplateVersion="1" camunda:class="com.codot.camundaconnectors.converter.ConverterFunction">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="operation">encode</camunda:inputParameter>
+          <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
+          <camunda:inputParameter name="src">someString324324ывыавыаsыііі</camunda:inputParameter>
+          <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
+          <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
+          <camunda:outputParameter name="response">${response}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0wij7gk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1187hd1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1sxkfj8" name="Base64 decode" camunda:modelerTemplate="com.codot.camundaconnectors.converter.base64-c7" camunda:modelerTemplateVersion="1" camunda:class="com.codot.camundaconnectors.converter.ConverterFunction">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
+          <camunda:inputParameter name="src">${response}</camunda:inputParameter>
+          <camunda:inputParameter name="operation">decode</camunda:inputParameter>
+          <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
+          <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
+          <camunda:outputParameter name="response">${response}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1187hd1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hkgo6g</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1hkgo6g" sourceRef="Activity_1sxkfj8" targetRef="Event_1gz2ozn" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="TestBase64ConverterTemplate">
+      <bpmndi:BPMNShape id="Activity_1gsk9u8_di" bpmnElement="Activity_03mntty">
+        <dc:Bounds x="220" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0ah4lji" bpmnElement="Activity_1sxkfj8">
+        <dc:Bounds x="370" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1gz2ozn_di" bpmnElement="Event_1gz2ozn">
+        <dc:Bounds x="502" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0wij7gk_di" bpmnElement="Flow_0wij7gk">
+        <di:waypoint x="188" y="117" />
+        <di:waypoint x="220" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1187hd1_di" bpmnElement="Flow_1187hd1">
+        <di:waypoint x="320" y="117" />
+        <di:waypoint x="370" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hkgo6g_di" bpmnElement="Flow_1hkgo6g">
+        <di:waypoint x="470" y="117" />
+        <di:waypoint x="502" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
