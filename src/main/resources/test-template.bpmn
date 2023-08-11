@@ -14,7 +14,7 @@
         <camunda:inputOutput>
           <camunda:inputParameter name="operation">encode</camunda:inputParameter>
           <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
-          <camunda:inputParameter name="src">someString324324ывыавыаsыііі</camunda:inputParameter>
+          <camunda:inputParameter name="src">lorem ipsum dolor st amet</camunda:inputParameter>
           <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
           <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
           <camunda:outputParameter name="response">${response}</camunda:outputParameter>
@@ -41,6 +41,12 @@
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="TestBase64ConverterTemplate">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1gz2ozn_di" bpmnElement="Event_1gz2ozn">
+        <dc:Bounds x="502" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1gsk9u8_di" bpmnElement="Activity_03mntty">
         <dc:Bounds x="220" y="77" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -48,12 +54,6 @@
       <bpmndi:BPMNShape id="BPMNShape_0ah4lji" bpmnElement="Activity_1sxkfj8">
         <dc:Bounds x="370" y="77" width="100" height="80" />
         <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="152" y="99" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1gz2ozn_di" bpmnElement="Event_1gz2ozn">
-        <dc:Bounds x="502" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0wij7gk_di" bpmnElement="Flow_0wij7gk">
         <di:waypoint x="188" y="117" />
