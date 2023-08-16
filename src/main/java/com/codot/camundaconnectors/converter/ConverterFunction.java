@@ -12,9 +12,7 @@ import java.util.Base64;
 public class ConverterFunction implements JavaDelegate {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConverterFunction.class);
 
-	String status_code = "";
-	String status_msg = "";
-	String response = "";
+	Response response = new Response();
 
 	@Override
 	public void execute(DelegateExecution delegateExecution) {
@@ -23,40 +21,40 @@ public class ConverterFunction implements JavaDelegate {
 		String operation = (String) delegateExecution.getVariable("operation");
 		String source = (String) delegateExecution.getVariable("src");
 
-		if (debug) startEvent(operation,	source, delegateExecution);
+		if (debug) startEvent(operation, source, delegateExecution);
 
 		try {
 
 			switch (operation) {
 				case "decode":
-					response = new String(Base64.getDecoder().decode(source));
-					status_code = "200";
-					status_msg = "OK";
+					response.setResponse(new String(Base64.getDecoder().decode(source)));
+					response.setStatusCode("200");
+					response.setStatusMsg("OK");
 					break;
 				case "encode":
-					response = Base64.getEncoder().encodeToString(source.getBytes(StandardCharsets.UTF_8));
-					status_code = "200";
-					status_msg = "OK";
+					response.setResponse(Base64.getEncoder().encodeToString(source.getBytes(StandardCharsets.UTF_8)));
+					response.setStatusCode("200");
+					response.setStatusMsg("OK");
 					break;
 				default:
-					status_code = "400";
-					status_msg = "Bad request. Invalid operation";
-					LOGGER.error(Utility.printLog(status_msg, delegateExecution));
+					response.setStatusCode("400");
+					response.setStatusMsg("Bad request. Invalid operation");
+					LOGGER.error(Utility.printLog(response.getStatusMsg(), delegateExecution));
 					break;
 			}
 		} catch (Exception e){
-			status_code = "400";
-			status_msg = e.getClass().getSimpleName() +" : "+e.getMessage();
-			LOGGER.error(Utility.printLog(status_msg, delegateExecution));
+			response.setStatusCode("400");
+			response.setStatusMsg(e.getClass().getSimpleName() + ": " + e.getMessage());
+			LOGGER.error(Utility.printLog(response.getStatusMsg(), delegateExecution));
 		}
 		if (debug) endEvent(delegateExecution);
 		packRespond(delegateExecution);
 	}
 
 	private void packRespond(DelegateExecution delegateExecution){
-		delegateExecution.setVariable("status_code", status_code);
-		delegateExecution.setVariable("status_msg", status_msg);
-		delegateExecution.setVariable("response", response);
+		delegateExecution.setVariable("status_code", response.getStatusCode());
+		delegateExecution.setVariable("status_msg", response.getStatusMsg());
+		delegateExecution.setVariable("response", response.getResponse());
 	}
 
 	private void startEvent(String operation, String source, DelegateExecution delegateExecution){
@@ -66,8 +64,8 @@ public class ConverterFunction implements JavaDelegate {
 	}
 
 	private void endEvent(DelegateExecution delegateExecution){
-		LOGGER.info(Utility.printLog("{statusCode: " + status_code + ", statusMsg: "+ status_msg +
-				", response: " + Utility.normalView(response, 23) + "}",
+		LOGGER.info(Utility.printLog("{statusCode: " + response.getStatusCode() + ", statusMsg: "+ response.getStatusMsg() +
+				", response: " + Utility.normalView(response.getResponse(), 23) + "}",
 				delegateExecution));
 	}
 }
