@@ -2,3 +2,4 @@
 /target/
 /camunda-h2-database.mv.db
 /todo.txt
+/camunda-h2-database.trace.db

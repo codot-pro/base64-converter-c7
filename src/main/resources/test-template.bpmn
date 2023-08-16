@@ -7,28 +7,15 @@
     <bpmn:sequenceFlow id="Flow_0wij7gk" sourceRef="StartEvent_1" targetRef="Activity_03mntty" />
     <bpmn:sequenceFlow id="Flow_1187hd1" sourceRef="Activity_03mntty" targetRef="Activity_1sxkfj8" />
     <bpmn:endEvent id="Event_1gz2ozn">
-      <bpmn:incoming>Flow_1hkgo6g</bpmn:incoming>
+      <bpmn:incoming>Flow_0wo7jis</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_03mntty" name="Base64 encode" camunda:modelerTemplate="com.codot.camundaconnectors.converter.base64-c7" camunda:modelerTemplateVersion="1" camunda:class="com.codot.camundaconnectors.converter.ConverterFunction">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="operation">encode</camunda:inputParameter>
-          <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
-          <camunda:inputParameter name="src">lorem ipsum dolor st amet</camunda:inputParameter>
-          <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
-          <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
-          <camunda:outputParameter name="response">${response}</camunda:outputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0wij7gk</bpmn:incoming>
-      <bpmn:outgoing>Flow_1187hd1</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_1sxkfj8" name="Base64 decode" camunda:modelerTemplate="com.codot.camundaconnectors.converter.base64-c7" camunda:modelerTemplateVersion="1" camunda:class="com.codot.camundaconnectors.converter.ConverterFunction">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
           <camunda:inputParameter name="src">${response}</camunda:inputParameter>
           <camunda:inputParameter name="operation">decode</camunda:inputParameter>
+          <camunda:inputParameter name="in/out">s-f</camunda:inputParameter>
           <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
           <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
           <camunda:outputParameter name="response">${response}</camunda:outputParameter>
@@ -37,35 +24,145 @@
       <bpmn:incoming>Flow_1187hd1</bpmn:incoming>
       <bpmn:outgoing>Flow_1hkgo6g</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1hkgo6g" sourceRef="Activity_1sxkfj8" targetRef="Event_1gz2ozn" />
+    <bpmn:sequenceFlow id="Flow_1hkgo6g" sourceRef="Activity_1sxkfj8" targetRef="Activity_1rfeasd" />
+    <bpmn:serviceTask id="Activity_03mntty" name="Base64 encode" camunda:modelerTemplate="com.codot.camundaconnectors.converter.base64-c7" camunda:modelerTemplateVersion="1" camunda:class="com.codot.camundaconnectors.converter.ConverterFunction">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="in/out">s-s</camunda:inputParameter>
+          <camunda:inputParameter name="src">lorem ipsum dolor st amet</camunda:inputParameter>
+          <camunda:inputParameter name="operation">encode</camunda:inputParameter>
+          <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
+          <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
+          <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
+          <camunda:outputParameter name="response">${response}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0wij7gk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1187hd1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1rfeasd" name="Base64 encode" camunda:modelerTemplate="com.codot.camundaconnectors.converter.base64-c7" camunda:modelerTemplateVersion="1" camunda:class="com.codot.camundaconnectors.converter.ConverterFunction">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
+          <camunda:inputParameter name="src">${response}</camunda:inputParameter>
+          <camunda:inputParameter name="operation">encode</camunda:inputParameter>
+          <camunda:inputParameter name="in/out">f-f</camunda:inputParameter>
+          <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
+          <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
+          <camunda:outputParameter name="response">${response}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1hkgo6g</bpmn:incoming>
+      <bpmn:outgoing>Flow_1j66cq8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1j66cq8" sourceRef="Activity_1rfeasd" targetRef="Activity_1mxp8pi" />
+    <bpmn:serviceTask id="Activity_1mxp8pi" name="Base64 decode" camunda:modelerTemplate="com.codot.camundaconnectors.converter.base64-c7" camunda:modelerTemplateVersion="1" camunda:class="com.codot.camundaconnectors.converter.ConverterFunction">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
+          <camunda:inputParameter name="src">${response}</camunda:inputParameter>
+          <camunda:inputParameter name="operation">decode</camunda:inputParameter>
+          <camunda:inputParameter name="in/out">f-s</camunda:inputParameter>
+          <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
+          <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
+          <camunda:outputParameter name="response">${response}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1j66cq8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wo7jis</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0wo7jis" sourceRef="Activity_1mxp8pi" targetRef="Event_1gz2ozn" />
+    <bpmn:textAnnotation id="TextAnnotation_0a6oqcm">
+      <bpmn:text>S-S</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1mramwh" sourceRef="Activity_03mntty" targetRef="TextAnnotation_0a6oqcm" />
+    <bpmn:textAnnotation id="TextAnnotation_0jce9tx">
+      <bpmn:text>S-F</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_10gi8tv" sourceRef="Activity_1sxkfj8" targetRef="TextAnnotation_0jce9tx" />
+    <bpmn:textAnnotation id="TextAnnotation_0wtxoef">
+      <bpmn:text>F-F</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0gd50vz" sourceRef="Activity_1rfeasd" targetRef="TextAnnotation_0wtxoef" />
+    <bpmn:textAnnotation id="TextAnnotation_1ogi0un">
+      <bpmn:text>F-S</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_10ado4q" sourceRef="Activity_1mxp8pi" targetRef="TextAnnotation_1ogi0un" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="TestBase64ConverterTemplate">
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="152" y="99" width="36" height="36" />
+      <bpmndi:BPMNShape id="TextAnnotation_0jce9tx_di" bpmnElement="TextAnnotation_0jce9tx">
+        <dc:Bounds x="420" y="80" width="100" height="30" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1gz2ozn_di" bpmnElement="Event_1gz2ozn">
-        <dc:Bounds x="502" y="99" width="36" height="36" />
+      <bpmndi:BPMNShape id="TextAnnotation_0a6oqcm_di" bpmnElement="TextAnnotation_0a6oqcm">
+        <dc:Bounds x="300" y="80" width="100" height="30" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1gsk9u8_di" bpmnElement="Activity_03mntty">
-        <dc:Bounds x="220" y="77" width="100" height="80" />
+      <bpmndi:BPMNShape id="TextAnnotation_0wtxoef_di" bpmnElement="TextAnnotation_0wtxoef">
+        <dc:Bounds x="550" y="80" width="100" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1ogi0un_di" bpmnElement="TextAnnotation_1ogi0un">
+        <dc:Bounds x="680" y="80" width="100" height="30" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0ah4lji" bpmnElement="Activity_1sxkfj8">
-        <dc:Bounds x="370" y="77" width="100" height="80" />
+        <dc:Bounds x="370" y="137" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_12tjbep" bpmnElement="Activity_1rfeasd">
+        <dc:Bounds x="500" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1gz2ozn_di" bpmnElement="Event_1gz2ozn">
+        <dc:Bounds x="772" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1g9rer8" bpmnElement="Activity_1mxp8pi">
+        <dc:Bounds x="630" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0godq2g_di" bpmnElement="Activity_03mntty">
+        <dc:Bounds x="240" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="172" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_10gi8tv_di" bpmnElement="Association_10gi8tv">
+        <di:waypoint x="444" y="137" />
+        <di:waypoint x="461" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1mramwh_di" bpmnElement="Association_1mramwh">
+        <di:waypoint x="319" y="137" />
+        <di:waypoint x="339" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0gd50vz_di" bpmnElement="Association_0gd50vz">
+        <di:waypoint x="574" y="137" />
+        <di:waypoint x="591" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_10ado4q_di" bpmnElement="Association_10ado4q">
+        <di:waypoint x="704" y="137" />
+        <di:waypoint x="721" y="110" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0wij7gk_di" bpmnElement="Flow_0wij7gk">
-        <di:waypoint x="188" y="117" />
-        <di:waypoint x="220" y="117" />
+        <di:waypoint x="208" y="177" />
+        <di:waypoint x="240" y="177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1187hd1_di" bpmnElement="Flow_1187hd1">
-        <di:waypoint x="320" y="117" />
-        <di:waypoint x="370" y="117" />
+        <di:waypoint x="340" y="177" />
+        <di:waypoint x="370" y="177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1hkgo6g_di" bpmnElement="Flow_1hkgo6g">
-        <di:waypoint x="470" y="117" />
-        <di:waypoint x="502" y="117" />
+        <di:waypoint x="470" y="177" />
+        <di:waypoint x="500" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1j66cq8_di" bpmnElement="Flow_1j66cq8">
+        <di:waypoint x="600" y="177" />
+        <di:waypoint x="630" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wo7jis_di" bpmnElement="Flow_0wo7jis">
+        <di:waypoint x="730" y="177" />
+        <di:waypoint x="772" y="177" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

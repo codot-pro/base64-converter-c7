@@ -15,6 +15,6 @@ class Utility {
 	}
 
 	public static String normalView(String src, int count){
-		return src.length() <= count*2+4 ? src : src.substring(0, count) + "..." + src.substring(src.length() - count, src.length() - 1);
+		return src.length() <= count*2+4 ? src : src.substring(0, count) + "..." + src.substring(src.length() - count);
 	}
 }

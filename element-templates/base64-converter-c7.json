@@ -60,6 +60,37 @@
       "group": "inputs"
     },
     {
+      "label": "Input > Output",
+      "type": "Dropdown",
+      "value": "s-s",
+      "choices": [
+        {
+          "name": "String > String",
+          "value": "s-s"
+        },
+        {
+          "name": "File > File",
+          "value": "f-f"
+        },
+        {
+          "name": "File > String",
+          "value": "f-s"
+        },
+        {
+          "name": "String > File",
+          "value": "s-f"
+        }
+      ],
+      "binding": {
+        "type": "camunda:inputParameter",
+        "name": "in/out"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "group": "inputs"
+    },
+    {
       "label": "Source",
       "type": "String",
       "feel": "required",
