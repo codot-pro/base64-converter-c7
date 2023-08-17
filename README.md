@@ -46,10 +46,19 @@ Reload the application, and you will be able to assign a template.
 ### Input data
 
 - Operation
-  - Base64 encode (UTF-8  ->  Base64)
-  - Base64 decode (Base64  ->  UTF-8)
+  - Base64 encode (UTF-8  >  Base64)
+  - Base64 decode (Base64  >  UTF-8)
+- Input/Output
+  - String to String
+  - File to File
+  - String to File
+  - File to String
 - Source
-  - String to encode or decode
+  - String to encode or decode OR fileName (file must be in the TEMP folder)
+
+> If Input/Output is selected as
+> - File > File, then the original filename will be taken and it will be overwritten
+> - String > File, then the name will be generated depending on the ProcessId and the time the file was created
 
 ### Output data
 
