@@ -24,6 +24,7 @@ public class ConverterFunction implements JavaDelegate {
 		String operation = (String) delegateExecution.getVariable("operation");
 		String io = (String) delegateExecution.getVariable("in/out");
 		String source = (String) delegateExecution.getVariable("src");
+		String fileName = (String) delegateExecution.getVariable("fileName");
 		if (debug) startEvent(operation, io, source, delegateExecution);
 
 		byte[] sourceAsBytes;
@@ -78,22 +79,15 @@ public class ConverterFunction implements JavaDelegate {
                     response.setResponse(new String(sourceAsBytes, StandardCharsets.UTF_8));
 					break;
                 case "f-f":
-					file = new File(System.getProperty("java.io.tmpdir"), source);
+                case "s-f":
+                    file = new File(System.getProperty("java.io.tmpdir"), fileName);
 					outputStream = new BufferedOutputStream(Files.newOutputStream(file.toPath()));
 					for (byte item : sourceAsBytes)
 						outputStream.write(item);
 					outputStream.close();
 					response.setResponse(file.getName());
 					break;
-				case "s-f":
-					file = new File(System.getProperty("java.io.tmpdir"), delegateExecution.getProcessInstanceId() + System.currentTimeMillis() + ".file");
-					outputStream = new BufferedOutputStream(Files.newOutputStream(file.toPath()));
-					for (byte item : sourceAsBytes)
-						outputStream.write(item);
-					outputStream.close();
-					response.setResponse(file.getName());
-					break;
-				default:
+                default:
 					response.setStatusCode("400");
 					response.setStatusMsg("Bad request. Invalid in/out");
 					LOGGER.error(Utility.printLog(response.getStatusMsg(), delegateExecution));

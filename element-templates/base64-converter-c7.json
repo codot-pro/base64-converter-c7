@@ -92,6 +92,7 @@
     },
     {
       "label": "Source",
+      "description": "Input fileName OR string",
       "type": "String",
       "feel": "required",
       "binding": {
@@ -102,6 +103,17 @@
         "notEmpty": true
       },
       "group": "inputs"
+    },
+    {
+      "label": "Output FileName",
+      "description": "Only if used output in file",
+      "type": "String",
+      "feel": "required",
+      "binding": {
+        "type": "camunda:inputParameter",
+        "name": "fileName"
+      },
+      "group": "output"
     },
     {
       "label": "status code",
