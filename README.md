@@ -54,7 +54,9 @@ Reload the application, and you will be able to assign a template.
   - String to File
   - File to String
 - Source
-  - String to encode or decode OR fileName (file must be in the TEMP folder)
+  - String OR fileName (file must be in the TEMP folder)
+- FileName
+  - The field will be used provided that **Input/Output** is selected as **File > File** or **String > File**
 
 > If Input/Output is selected as
 > - File > File, then the original filename will be taken and it will be overwritten
