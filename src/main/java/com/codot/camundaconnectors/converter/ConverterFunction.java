@@ -23,7 +23,7 @@ public class ConverterFunction implements JavaDelegate {
 
 		String operation = (String) delegateExecution.getVariable("operation");
 		String io = (String) delegateExecution.getVariable("in/out");
-		String source = (String) delegateExecution.getVariable("src");
+		String source = delegateExecution.getVariable("src").toString();
 		String fileName = (String) delegateExecution.getVariable("fileName");
 		if (debug) startEvent(operation, io, source, delegateExecution);
 
@@ -116,7 +116,7 @@ public class ConverterFunction implements JavaDelegate {
 
 	private void endEvent(DelegateExecution delegateExecution){
 		LOGGER.info(Utility.printLog("{statusCode: " + response.getStatusCode() + ", statusMsg: "+ response.getStatusMsg() +
-				", response: " + Utility.normalView(response.getResponse(), 40) + "}",
+				", response: " + Utility.normalView(response.getResponse().toString(), 40) + "}",
 				delegateExecution));
 	}
 }

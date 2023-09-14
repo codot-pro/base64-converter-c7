@@ -3,7 +3,7 @@ package com.codot.camundaconnectors.converter;
 public class Response {
     private String statusCode = "";
     private String statusMsg = "";
-    private String response = "";
+    private Object response = "";
 
     public String getStatusCode() {
         return statusCode;
@@ -21,7 +21,7 @@ public class Response {
         this.statusMsg = statusMsg;
     }
 
-    public String getResponse() {
+    public Object getResponse() {
         return response;
     }
 
