@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0haevpk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.13.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
-  <bpmn:process id="TestBase64ConverterTemplate" isExecutable="true" camunda:historyTimeToLive="3">
+  <bpmn:process id="TestBase64ConverterTemplate" isExecutable="true" camunda:versionTag="v1" camunda:historyTimeToLive="3">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0wij7gk</bpmn:outgoing>
     </bpmn:startEvent>
@@ -13,10 +13,10 @@
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
-          <camunda:inputParameter name="src">${response}</camunda:inputParameter>
           <camunda:inputParameter name="operation">decode</camunda:inputParameter>
           <camunda:inputParameter name="in/out">s-f</camunda:inputParameter>
           <camunda:inputParameter name="fileName">decodedString.txt</camunda:inputParameter>
+          <camunda:inputParameter name="src">${response.prop("converter_response")}</camunda:inputParameter>
           <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
           <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
           <camunda:outputParameter name="response">${response}</camunda:outputParameter>
@@ -45,10 +45,10 @@
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
-          <camunda:inputParameter name="src">${response}</camunda:inputParameter>
           <camunda:inputParameter name="operation">encode</camunda:inputParameter>
           <camunda:inputParameter name="in/out">f-f</camunda:inputParameter>
           <camunda:inputParameter name="fileName">encodedFile.txt</camunda:inputParameter>
+          <camunda:inputParameter name="src">${response.prop("converter_response")}</camunda:inputParameter>
           <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
           <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
           <camunda:outputParameter name="response">${response}</camunda:outputParameter>
@@ -62,9 +62,9 @@
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="debugMode">true</camunda:inputParameter>
-          <camunda:inputParameter name="src">${response}</camunda:inputParameter>
           <camunda:inputParameter name="operation">decode</camunda:inputParameter>
           <camunda:inputParameter name="in/out">f-s</camunda:inputParameter>
+          <camunda:inputParameter name="src">${response.prop("converter_response")}</camunda:inputParameter>
           <camunda:outputParameter name="status_code">${status_code}</camunda:outputParameter>
           <camunda:outputParameter name="status_msg">${status_msg}</camunda:outputParameter>
           <camunda:outputParameter name="response">${response}</camunda:outputParameter>

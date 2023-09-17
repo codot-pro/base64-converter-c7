@@ -74,6 +74,8 @@ Reload the application, and you will be able to assign a template.
 - Response can be
     - body (if it is possible to parse it)
     - file (it will be written to the TEMP directory with the specified file name)
+> **RESPONSE** will be written to an object of type Spin
+> example using in template: ${__response__.prop("converter_response").prop("result").prop("decContent")}
 
 ## Example
 

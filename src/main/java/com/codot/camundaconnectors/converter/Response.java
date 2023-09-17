@@ -1,5 +1,8 @@
 package com.codot.camundaconnectors.converter;
 
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
+
 public class Response {
     private String statusCode = "";
     private String statusMsg = "";
@@ -25,7 +28,7 @@ public class Response {
         return response;
     }
 
-    public void setResponse(String response) {
+    public void setResponse(Object response) {
         this.response = response;
     }
 
