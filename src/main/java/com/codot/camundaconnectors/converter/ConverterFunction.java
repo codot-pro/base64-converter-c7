@@ -11,6 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Base64;
 
+import static org.camunda.spin.Spin.S;
+
 @Component
 public class ConverterFunction implements JavaDelegate {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConverterFunction.class);
@@ -23,9 +25,12 @@ public class ConverterFunction implements JavaDelegate {
 
 		String operation = (String) delegateExecution.getVariable("operation");
 		String io = (String) delegateExecution.getVariable("in/out");
-		String source = (String) delegateExecution.getVariable("src");
+		String source = delegateExecution.getVariable("src").toString();
 		String fileName = (String) delegateExecution.getVariable("fileName");
 		if (debug) startEvent(operation, io, source, delegateExecution);
+		if (source.startsWith("\"") && source.endsWith("\"") && source.length() > 2){
+			source = source.substring(1, source.length() - 1);
+		}
 
 		byte[] sourceAsBytes;
 		try {
@@ -76,7 +81,18 @@ public class ConverterFunction implements JavaDelegate {
 			switch (io){
 				case "s-s":
                 case "f-s":
-                    response.setResponse(new String(sourceAsBytes, StandardCharsets.UTF_8));
+					String responseString = new String(sourceAsBytes, StandardCharsets.UTF_8);
+					try {
+						response.setResponse(
+								S("{\"converter_response\": " + responseString + "}")
+						);
+					} catch (Exception e){
+						response.setResponse(
+								S("{\"converter_response\": \"" +
+										responseString.replaceAll("\"", "\\\"")
+										+ "\"}")
+						);
+					}
 					break;
                 case "f-f":
                 case "s-f":
@@ -85,7 +101,10 @@ public class ConverterFunction implements JavaDelegate {
 					for (byte item : sourceAsBytes)
 						outputStream.write(item);
 					outputStream.close();
-					response.setResponse(file.getName());
+					if (debug) LOGGER.info(Utility.printLog("File saved at path: " + System.getProperty("java.io.tmpdir"),delegateExecution));
+					response.setResponse(
+							S("{\"converter_response\":\"" +file.getName()+ "\"}")
+					);
 					break;
                 default:
 					response.setStatusCode("400");
@@ -97,7 +116,6 @@ public class ConverterFunction implements JavaDelegate {
 			response.setStatusMsg(e.getClass().getSimpleName() + ": " + e.getMessage());
 			LOGGER.error(Utility.printLog(response.getStatusMsg(), delegateExecution));
 		}
-
 		if (debug) endEvent(delegateExecution);
 		packRespond(delegateExecution);
 	}
@@ -110,13 +128,13 @@ public class ConverterFunction implements JavaDelegate {
 
 	private void startEvent(String operation, String io, String source, DelegateExecution delegateExecution){
 		LOGGER.info(Utility.printLog(
-				"{operation: " + operation + ", in/out: " + io + ", source: " + Utility.normalView(source, 40) + "}",
+				"{operation: " + operation + ", in/out: " + io + ", source: " + Utility.normalView(source, 300) + "}",
 				delegateExecution));
 	}
 
 	private void endEvent(DelegateExecution delegateExecution){
 		LOGGER.info(Utility.printLog("{statusCode: " + response.getStatusCode() + ", statusMsg: "+ response.getStatusMsg() +
-				", response: " + Utility.normalView(response.getResponse(), 40) + "}",
+				", response: " + Utility.normalView(response.getResponse().toString(), 300) + "}",
 				delegateExecution));
 	}
 }
