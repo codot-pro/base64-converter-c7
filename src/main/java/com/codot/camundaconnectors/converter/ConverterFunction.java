@@ -128,13 +128,13 @@ public class ConverterFunction implements JavaDelegate {
 
 	private void startEvent(String operation, String io, String source, DelegateExecution delegateExecution){
 		LOGGER.info(Utility.printLog(
-				"{operation: " + operation + ", in/out: " + io + ", source: " + Utility.normalView(source, 300) + "}",
+				"{operation: " + operation + ", in/out: " + io + ", source: " + source + "}",
 				delegateExecution));
 	}
 
 	private void endEvent(DelegateExecution delegateExecution){
 		LOGGER.info(Utility.printLog("{statusCode: " + response.getStatusCode() + ", statusMsg: "+ response.getStatusMsg() +
-				", response: " + Utility.normalView(response.getResponse().toString(), 300) + "}",
+				", response: " + response.getResponse().toString() + "}",
 				delegateExecution));
 	}
 }
