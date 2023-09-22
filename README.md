@@ -77,6 +77,38 @@ Reload the application, and you will be able to assign a template.
 > **RESPONSE** will be written to an object of type Spin
 > example using in template: ${__response__.prop("converter_response").prop("result").prop("decContent")}
 
+```json
+{
+  "status_code": "200",
+  "status_msg": "OK",
+  "response": {
+    "converter_response": "fileName"
+  }
+}
+```
+
+```json
+{
+  "status_code": "200",
+  "status_msg": "OK",
+  "response": {
+    "converter_response": "decoded/encoded input"
+  }
+}
+```
+
+```json
+{
+  "status_code": "200",
+  "status_msg": "OK",
+  "response": {
+    "converter_response": {
+      
+    }
+  }
+}
+```
+
 ## Example
 
 This example can be found in **src/main/resources/test-template.bpmn**
